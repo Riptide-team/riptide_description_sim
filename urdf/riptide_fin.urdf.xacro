@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot name="$(arg prefix)" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="riptide_fin" params="name orientation">
+		<xacro:property name="angle" value="${-2*orientation*pi/3 + pi/2}"/>
+		<link name="$(arg prefix)_${name}_fin">
+			<visual>
+				<origin xyz="0 0 0" rpy="${-pi/2} ${pi} 0" />
+				<geometry>
+					<mesh filename="package://riptide_description_sim/meshes/riptide_fin.stl" scale="0.001 0.001 0.001"/>
+				</geometry>
+			</visual>
+		</link>
+
+		<joint name="$(arg prefix)_${name}_fin" type="revolute">
+			<axis xyz="0 0 1"/>
+			<limit effort="1000.0" lower="${-pi/4}" upper="${pi/4}" velocity="0.5"/>
+			<origin rpy="${angle-pi/2} 0 0" xyz="-.35 ${.062*cos(angle)} ${.062*sin(angle)}"/>
+			<parent link="$(arg prefix)"/>
+			<child link="$(arg prefix)_${name}_fin"/>
+		</joint>
+	</xacro:macro>
+</robot>
