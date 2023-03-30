@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="$(arg prefix)_echosounder" type="sensor">
+        <hardware>
+            <plugin>riptide_hardware_sim/EchoSounderHardwareSim</plugin>
+            <param name="namespace">riptide_1</param>
+            <param name="state_topic">echosounder/range</param>
+        </hardware>
+        <sensor name="echosounder">
+            <state_interface name="range"/>
+        </sensor>
+    </ros2_control>
+     
+</robot>

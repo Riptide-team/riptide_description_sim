@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="$(arg prefix)_pressure" type="sensor">
+        <hardware>
+            <plugin>riptide_hardware_sim/PressureHardwareSim</plugin>
+            <param name="namespace">riptide_1</param>
+            <param name="pressure_topic">pressure</param>
+            <!-- <param name="calibration_pressure">985</param> -->
+        </hardware>
+        <sensor name="$(arg prefix)_pressure">
+            <state_interface name="pressure"/>
+            <state_interface name="temperature"/>
+            <state_interface name="depth"/>
+            <state_interface name="altitude"/>
+        </sensor>
+    </ros2_control>
+     
+</robot>

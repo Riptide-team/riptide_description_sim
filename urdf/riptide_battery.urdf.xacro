@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="$(arg prefix)_battery_card" type="sensor">
+        <hardware>
+            <plugin>riptide_hardware_sim/BatteryHardwareSim</plugin>
+            <param name="namespace">$(arg prefix)</param>
+            <param name="battery_topic">battery</param>
+        </hardware>
+        <sensor name="$(arg prefix)_battery_card">
+            <state_interface name="tension"/>
+            <state_interface name="current"/>
+        </sensor>
+    </ros2_control>
+     
+</robot>
