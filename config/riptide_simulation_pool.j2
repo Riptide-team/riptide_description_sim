@@ -32,6 +32,19 @@ Visualization Manager:
       Plane Cell Count: 20
       Reference Frame: world
       Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Pool
+      Namespaces:
+        pool: true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /riptide_simulator/pool/marker
+      Value: true
     - Class: rviz_default_plugins/TF
       Enabled: false
       Frame Timeout: 15
@@ -179,7 +192,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 10
+      Distance: 20
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -188,14 +201,14 @@ Visualization Manager:
       Focal Point:
         X: 0
         Y: 0
-        Z: 0
+        Z: -3
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: 0.5
-      Target Frame: {{ riptides[0].name }}
+      Target Frame: world
       Value: Orbit (rviz)
       Yaw: 4.0
     Saved: ~
