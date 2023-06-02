@@ -18,6 +18,9 @@
             <state_interface name="orientation.y"/>
             <state_interface name="orientation.z"/>
             <state_interface name="orientation.w"/>
+            <state_interface name="magnetic.x"/>
+            <state_interface name="magnetic.y"/>
+            <state_interface name="magnetic.z"/>
         </sensor>
     </ros2_control>
      
