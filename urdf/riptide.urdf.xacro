@@ -1,23 +1,36 @@
 <?xml version="1.0"?>
 <robot name="$(arg prefix)" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+	<link name="base_link" />
+
     <!-- Rigid body description of the base link -->
 	<link name="$(arg prefix)">
 		<visual>
-			<origin xyz="0.2 0 0" rpy="${pi/2} 0 ${pi}"/>
+			<origin xyz="0.2 0 0" rpy="${-pi/2} 0 ${pi}"/>
 			<geometry>
 				<mesh filename="package://riptide_description_sim/meshes/riptide_body.stl" scale="0.001 0.001 0.001"/>
 			</geometry>
-		  </visual>
+		</visual>
+		<inertial>
+			<origin xyz="0.12 0 0.08" rpy="${-pi/2} 0 ${pi}"/>
+			<mass value="9"/>
+			<inertia ixx="0.03675" ixy="0" ixz="0" iyy="1.1465" iyz="0" izz="1.1465"/>
+		</inertial>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 ${-pi/2} 0" />
+			<geometry>
+				<box size="0.12 0.12 0.95" />
+			</geometry>
+		</collision>
 	</link>
 
-	<link name="$(arg prefix)_echosounder"/>
+	<!-- <link name="$(arg prefix)_echosounder"/> -->
 
-	<joint name="$(arg prefix)_echosounder" type="fixed">
+	<!-- <joint name="$(arg prefix)_echosounder" type="fixed">
 		<origin rpy="0 ${pi/2} 0" xyz="0.28 0 -0.05"/>
 		<parent link="$(arg prefix)"/>
 		<child link="$(arg prefix)_echosounder"/>
-	</joint>
+	</joint> -->
 
 	<link name="$(arg prefix)_thruster">
 		<visual>
@@ -26,13 +39,45 @@
 				<mesh filename="package://riptide_description_sim/meshes/propeller.dae" scale="1.5 1.5 1.5"/>
 			</geometry>
 		</visual>
+		<inertial>
+			<mass value="0.02" />
+			<inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.000005" />
+		</inertial>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
+			<geometry>
+				<cylinder radius="0.04" length="0.03"/>
+			</geometry>
+		</collision>
 	</link>
 
-	<joint name="$(arg prefix)_thruster" type="continuous">
+	<joint name="$(arg prefix)_base_link" type="fixed">
+		<origin rpy="0 0 0" xyz="-0.51 0 0"/>
+		<parent link="base_link"/>
+		<child link="$(arg prefix)"/>
+		<dynamics damping="0.0" friction="0.0"/>
+	</joint>
+
+	<joint name="$(arg prefix)_thruster_joint" type="continuous">
 		<axis xyz="1 0 0"/>
 		<origin rpy="0 0 0" xyz="-0.51 0 0"/>
 		<parent link="$(arg prefix)"/>
 		<child link="$(arg prefix)_thruster"/>
+		<dynamics damping="0.0" friction="0.0"/>
+	</joint>
+
+	<link name="$(arg prefix)_imu">
+		<inertial>
+			<mass value="0.001"/>
+			<inertia ixx="0.0000001" ixy="0" ixz="0" iyy="0.0000001" iyz="0" izz="0.0000001"/>
+		</inertial>
+	</link>
+
+	<joint name="$(arg prefix)_imu_joint" type="fixed">
+		<origin xyz="0.0 0.0 0.0"/>
+		<parent link="$(arg prefix)"/>
+		<child link="$(arg prefix)_imu"/>
+		<dynamics damping="0.0" friction="0.0"/>
 	</joint>
 
 	<xacro:include filename="$(find riptide_description_sim)/urdf/riptide_fin.urdf.xacro"/>
@@ -42,10 +87,10 @@
 	<xacro:riptide_fin name="s" orientation="2"/>
 
     <!-- ROS2 control hardware interfaces -->
-    <xacro:include filename="riptide_imu.urdf.xacro"/>
-	<xacro:include filename="riptide_actuators.urdf.xacro"/>
-	<xacro:include filename="riptide_echosounder.urdf.xacro"/>
-	<xacro:include filename="riptide_pressure.urdf.xacro"/>
-	<xacro:include filename="riptide_battery.urdf.xacro"/>
+    <!-- <xacro:include filename="$(find riptide_description_sim)/urdf/riptide_imu.urdf.xacro"/> -->
+	<!-- <xacro:include filename="$(find riptide_description_sim)/urdf/riptide_actuators.urdf.xacro"/> -->
+	<!-- <xacro:include filename="$(find riptide_description_sim)/urdf/riptide_pressure.urdf.xacro"/> -->
+	<xacro:include filename="$(find riptide_description_sim)/urdf/gazebo.urdf.xacro"/>
+	<xacro:include filename="$(find riptide_description_sim)/urdf/ros2control.urdf.xacro"/>
     
 </robot>

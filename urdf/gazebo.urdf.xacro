@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot name="$(arg prefix)" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <gazebo reference="$(arg prefix)_imu">
+        <sensor name="$(arg prefix)_imu_sensor" type="imu">
+          <always_on>1</always_on>
+          <update_rate>100.0</update_rate>
+          <visualize>true</visualize>
+          <topic>imu</topic>
+        </sensor>
+
+        <plugin filename="ignition-gazebo-imu-system" name="ignition::gazebo::systems::Imu" />
+    </gazebo>
+
+    <gazebo>
+        <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+            <parameters>$(find riptide_bringup_sim)/config/riptide_controllers.yaml</parameters>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-thruster-system" name="ignition::gazebo::systems::Thruster">
+            <joint_name>$(arg prefix)_thruster_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1000</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <use_angvel_cmd>true</use_angvel_cmd>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
+            <link_name>base_link</link_name> <!-- dummy_link and riptide link are fusionned in gazebo as the joint between the two links is fixed-->
+            <xDotU>-0.01</xDotU>
+            <yDotV>-0.05</yDotV>
+            <zDotW>-0.05</zDotW>
+            <kDotP>-0.01</kDotP>
+            <mDotQ>-0.05</mDotQ>
+            <nDotR>-0.05</nDotR>
+
+            <xUabsU>-5</xUabsU>
+            <yVabsV>-1000</yVabsV>
+            <zWabsW>-1000</zWabsW>
+            <kPabsP>-1</kPabsP>
+            <mQabsQ>-700</mQabsQ>
+            <nRabsR>-700</nRabsR>
+
+            <xU>-0.1</xU>
+            <yV>-0.1</yV>
+            <zW>-0.1</zW>
+            <kP>-0.1</kP>
+            <mQ>-0.1</mQ>
+            <nR>-0.1</nR>
+        </plugin>
+    </gazebo>
+
+    <gazebo reference="$(arg prefix)">
+        <visual>
+            <material>
+                <ambient>1. 0.05 0.05 1</ambient>
+                <diffuse>1. 0.05 0.05 1</diffuse>
+                <specular>1. 0.15 0.15 1</specular>
+            </material>
+        </visual>
+    </gazebo>
+
+    <gazebo reference="$(arg prefix)_thruster">
+        <visual>
+            <material>
+                <ambient>0.05 0.35. 1. 1</ambient>
+                <diffuse>0.05 0.35. 1. 1</diffuse>
+                <specular>0.15 0.45. 1. 1</specular>
+            </material>
+        </visual>
+    </gazebo>
+
+</robot>

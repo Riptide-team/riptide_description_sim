@@ -2,7 +2,7 @@
 <robot name="$(arg prefix)" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:macro name="riptide_fin" params="name orientation">
-		<xacro:property name="angle" value="${-2*orientation*pi/3 + pi/2}"/>
+		<xacro:property name="angle" value="${-2*orientation*pi/3 - pi/2}"/>
 		<link name="$(arg prefix)_${name}_fin">
 			<visual>
 				<origin xyz="0 0 0" rpy="${-pi/2} ${pi} 0" />
@@ -10,14 +10,53 @@
 					<mesh filename="package://riptide_description_sim/meshes/riptide_fin.stl" scale="0.001 0.001 0.001"/>
 				</geometry>
 			</visual>
+			<inertial>
+                <mass value="0.01" />
+                <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.000005" />
+            </inertial>
+			<collision>
+				<origin xyz="-0.01 0.04 0" rpy="0 0 0" />
+                <geometry>
+                    <box size="0.08 0.1 0.08" />
+                </geometry>
+            </collision>
 		</link>
 
-		<joint name="$(arg prefix)_${name}_fin" type="revolute">
+		<joint name="$(arg prefix)_${name}_joint" type="revolute">
 			<axis xyz="0 0 1"/>
-			<limit effort="1000.0" lower="${-pi/4}" upper="${pi/4}" velocity="0.5"/>
 			<origin rpy="${angle-pi/2} 0 0" xyz="-.35 ${.062*cos(angle)} ${.062*sin(angle)}"/>
 			<parent link="$(arg prefix)"/>
 			<child link="$(arg prefix)_${name}_fin"/>
+			<limit effort="100000.0" lower="${-pi/4}" upper="${pi/4}" velocity="0.5"/>
+			<dynamics damping="0.0" friction="0.0"/>
 		</joint>
+
+		<gazebo>
+			<plugin filename="ignition-gazebo-lift-drag-system" name="ignition::gazebo::systems::LiftDrag">
+				<link_name>$(arg prefix)_${name}_fin</link_name>
+				<control_joint_name>$(arg prefix)_${name}_joint</control_joint_name>
+				<air_density>1000</air_density>
+				<cla>4.13</cla>
+				<cla_stall>-1.1</cla_stall>
+				<cda>0.2</cda>
+				<cda_stall>0.03</cda_stall>
+				<alpha_stall>0.17</alpha_stall>
+				<a0>0</a0>
+				<area>0.0244</area>
+				<upward>0 1 0</upward>
+				<forward>1 0 0</forward>
+				<cp>0 0 0.05</cp>
+			</plugin>
+		</gazebo>
+
+		<gazebo reference="$(arg prefix)_${name}_fin">
+			<visual>
+				<material>
+                    <ambient>1. 1. 1. 0.4</ambient>
+                    <diffuse>1. 1. 1. 0.4</diffuse>
+                    <specular>1. 1. 1. 0.4</specular>
+                </material>
+			</visual>
+		</gazebo>
 	</xacro:macro>
 </robot>

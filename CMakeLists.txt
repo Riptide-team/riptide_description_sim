@@ -9,7 +9,12 @@ endif()
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY config launch meshes urdf
+  DIRECTORY config launch meshes urdf worlds
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  FILES model.sdf model.config
   DESTINATION share/${PROJECT_NAME}
 )
 

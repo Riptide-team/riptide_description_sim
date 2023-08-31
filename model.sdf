@@ -1,0 +1,362 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+    <model name="riptide" canonical_link="base_link">
+        <link name="base_link">
+            <pose relative_to='__model__'>0 0 -0.05 0 0 0</pose>
+            <inertial>
+                <mass>11</mass>
+                <inertia>
+                    <ixx>0.03675</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>1.1465</iyy>
+                    <iyz>0</iyz>
+                    <izz>1.1465</izz>
+                </inertia>
+            </inertial>
+
+            <!-- <collision name='collision'>
+                <pose>0 0 0 0 1.5707 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.07</radius>
+                        <length>0.95</length>
+                    </cylinder>
+                </geometry>
+            </collision> -->
+
+            <collision name='collision_buoyancy'>
+                <pose relative_to="__model__">0 0 0.05 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>1. 0.11 0.11</size>
+                    </box>
+                </geometry>
+            </collision>
+            
+            <visual name='visual'>
+                <pose relative_to="__model__">0.2 0 0 1.5707 0 3.14159</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.001 0.001 0.001</scale>
+                        <uri>model://riptide_description_sim/meshes/riptide_body.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>1. 0.05 0.05 1</ambient>
+                    <diffuse>1. 0.05 0.05 1</diffuse>
+                    <specular>1. 0.15 0.15 1</specular>
+                </material>
+            </visual>
+        </link>
+
+        <link name="propeller">
+            <pose relative_to="propeller_joint">-0.005 0 0 0 0 3.14159</pose>
+            <inertial>
+                <mass>0.02</mass>
+                <inertia>
+                    <ixx>0.00001</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00001</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000005</izz>
+                </inertia>
+            </inertial>
+
+            <collision name='collision'>
+                <pose>0 0 0 0 1.5707 0</pose>
+                <geometry>
+                    <cylinder>
+                        <radius>0.04</radius>
+                        <length>0.03</length>
+                    </cylinder>
+                </geometry>
+            </collision>
+            
+            <visual name='visual'>
+                <pose>0 0 0 0 0 3.14159</pose>
+                <geometry>
+                    <mesh>
+                        <scale>1.5 1.5 1.5</scale>
+                        <uri>meshes/propeller.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>0.05 0.35. 1. 1</ambient>
+                    <diffuse>0.05 0.35. 1. 1</diffuse>
+                    <specular>0.15 0.45. 1. 1</specular>
+                </material>
+            </visual>
+        </link>
+
+        <link name="d_fin">
+            <pose relative_to="d_fin_joint">0 0 -0.01 0 0 0</pose>
+            <inertial>
+                <mass>0.02</mass>
+                <inertia>
+                    <ixx>0.00001</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00001</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000005</izz>
+                </inertia>
+            </inertial>
+
+            <collision name='collision'>
+                <pose>-0.01 0 0.04 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.08 0.01 0.08</size>
+                    </box>
+                </geometry>
+            </collision>
+            
+            <visual name='visual'>
+                <pose>0 0 0 1.5707 0 3.14159</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.001 0.001 0.001</scale>
+                        <uri>meshes/riptide_fin.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>1. 1. 1. 0.4</ambient>
+                    <diffuse>1. 1. 1. 0.4</diffuse>
+                    <specular>1. 1. 1. 0.4</specular>
+                </material>
+            </visual>
+        </link>
+
+        <link name="p_fin">
+            <pose relative_to="p_fin_joint">0 0 -0.01 0 0 0</pose>
+            <inertial>
+                <mass>0.02</mass>
+                <inertia>
+                    <ixx>0.00001</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00001</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000005</izz>
+                </inertia>
+            </inertial>
+
+            <collision name='collision'>
+                <pose>-0.01 0 0.04 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.08 0.01 0.08</size>
+                    </box>
+                </geometry>
+            </collision>
+            
+            <visual name='visual'>
+                <pose>0 0 0 1.5707 0 3.14159</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.001 0.001 0.001</scale>
+                        <uri>meshes/riptide_fin.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>1. 1. 1. 0.4</ambient>
+                    <diffuse>1. 1. 1. 0.4</diffuse>
+                    <specular>1. 1. 1. 0.4</specular>
+                </material>
+            </visual>
+        </link>
+
+        <link name="s_fin">
+            <pose relative_to="s_fin_joint">0 0 -0.01 0 0 0</pose>
+            <inertial>
+                <mass>0.02</mass>
+                <inertia>
+                    <ixx>0.00001</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.00001</iyy>
+                    <iyz>0</iyz>
+                    <izz>0.000005</izz>
+                </inertia>
+            </inertial>
+
+            <collision name='collision'>
+                <pose>-0.01 0 0.04 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.08 0.01 0.08</size>
+                    </box>
+                </geometry>
+            </collision>
+            
+            <visual name='visual'>
+                <pose>0 0 0 1.5707 0 3.14159</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.001 0.001 0.001</scale>
+                        <uri>meshes/riptide_fin.stl</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>1. 1. 1. 0.4</ambient>
+                    <diffuse>1. 1. 1. 0.4</diffuse>
+                    <specular>1. 1. 1. 0.4</specular>
+                </material>
+            </visual>
+        </link>
+
+        <joint name='propeller_joint' type='revolute'>
+            <pose relative_to='__model__'>-0.5 0 0 0 0 0</pose>
+            <parent>base_link</parent>
+            <child>propeller</child>
+            <axis>
+                <xyz expressed_in='base_link'>1 0 0</xyz>
+            </axis>
+        </joint>
+
+        <joint name='d_fin_joint' type='revolute'>
+            <pose relative_to='__model__'>-0.35 0 0.07 0 0 0</pose>
+            <parent>base_link</parent>
+            <child>d_fin</child>
+            <axis>
+                <xyz expressed_in='d_fin_joint'>0 0 1</xyz>
+                <limit>
+                    <lower>-0.78539</lower>
+                    <upper>0.78539</upper>
+                    <velocity>8.7</velocity>
+                    <effort>500</effort>
+                </limit>
+            </axis>
+        </joint>
+
+        <joint name='p_fin_joint' type='revolute'>
+            <pose relative_to='__model__'>-0.35 0.0606 -0.035 -2.094 0 0</pose>
+            <parent>base_link</parent>
+            <child>p_fin</child>
+            <axis>
+                <xyz expressed_in='p_fin_joint'>0 0 1</xyz>
+                <limit>
+                    <lower>-0.78539</lower>
+                    <upper>0.78539</upper>
+                    <velocity>8.7</velocity>
+                    <effort>500</effort>
+                </limit>
+            </axis>
+        </joint>
+
+        <joint name='s_fin_joint' type='revolute'>
+            <pose relative_to='__model__'>-0.35 -0.0606 -0.035 2.094 0 0</pose>
+            <parent>base_link</parent>
+            <child>s_fin</child>
+            <axis>
+                <xyz expressed_in='s_fin_joint'>0 0 1</xyz>
+                <limit>
+                    <lower>-0.78539</lower>
+                    <upper>0.78539</upper>
+                    <velocity>8.7</velocity>
+                    <effort>500</effort>
+                </limit>
+            </axis>
+        </joint>
+
+        <plugin filename="ignition-gazebo-thruster-system" name="ignition::gazebo::systems::Thruster">
+            <joint_name>propeller_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1000</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <use_angvel_cmd>true</use_angvel_cmd>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
+            <link_name>base_link</link_name>
+            <xDotU>-0.01</xDotU>
+            <yDotV>-0.05</yDotV>
+            <zDotW>-0.05</zDotW>
+            <kDotP>-0.01</kDotP>
+            <mDotQ>-0.05</mDotQ>
+            <nDotR>-0.05</nDotR>
+
+            <xUabsU>-5</xUabsU>
+            <yVabsV>-1000</yVabsV>
+            <zWabsW>-1000</zWabsW>
+            <kPabsP>-1</kPabsP>
+            <mQabsQ>-700</mQabsQ>
+            <nRabsR>-700</nRabsR>
+
+            <xU>-0.1</xU>
+            <yV>-0.1</yV>
+            <zW>-0.1</zW>
+            <kP>-0.1</kP>
+            <mQ>-0.1</mQ>
+            <nR>-0.1</nR>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+            <joint_name>d_fin_joint</joint_name>
+            <use_velocity_commands>1</use_velocity_commands>
+            <p_gain>10000</p_gain>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+            <joint_name>p_fin_joint</joint_name>
+            <use_velocity_commands>1</use_velocity_commands>
+            <p_gain>10000</p_gain>
+        </plugin>
+        <plugin filename="ignition-gazebo-joint-position-controller-system" name="ignition::gazebo::systems::JointPositionController">
+            <joint_name>s_fin_joint</joint_name>
+            <use_velocity_commands>1</use_velocity_commands>
+            <p_gain>10000</p_gain>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-lift-drag-system" name="ignition::gazebo::systems::LiftDrag">
+            <link_name>d_fin</link_name>
+            <control_joint_name>d_fin_joint</control_joint_name>
+            <air_density>1000</air_density>
+            <cla>4.13</cla>
+            <cla_stall>-1.1</cla_stall>
+            <cda>0.2</cda>
+            <cda_stall>0.03</cda_stall>
+            <alpha_stall>0.17</alpha_stall>
+            <a0>0</a0>
+            <area>0.0244</area>
+            <upward>0 1 0</upward>
+            <forward>1 0 0</forward>
+            <cp>0 0 0.05</cp>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-lift-drag-system" name="ignition::gazebo::systems::LiftDrag">
+            <link_name>p_fin</link_name>
+            <control_joint_name>p_fin_joint</control_joint_name>
+            <air_density>1000</air_density>
+            <cla>4.13</cla>
+            <cla_stall>-1.1</cla_stall>
+            <cda>0.2</cda>
+            <cda_stall>0.03</cda_stall>
+            <alpha_stall>0.17</alpha_stall>
+            <a0>0</a0>
+            <area>0.0244</area>
+            <upward>0 1 0</upward>
+            <forward>1 0 0</forward>
+            <cp>0 0 0.05</cp>
+        </plugin>
+
+        <plugin filename="ignition-gazebo-lift-drag-system" name="ignition::gazebo::systems::LiftDrag">
+            <link_name>s_fin</link_name>
+            <control_joint_name>s_fin_joint</control_joint_name>
+            <air_density>1000</air_density>
+            <cla>4.13</cla>
+            <cla_stall>-1.1</cla_stall>
+            <cda>0.2</cda>
+            <cda_stall>0.03</cda_stall>
+            <alpha_stall>0.17</alpha_stall>
+            <a0>0</a0>
+            <area>0.0244</area>
+            <upward>0 1 0</upward>
+            <forward>1 0 0</forward>
+            <cp>0 0 0.05</cp>
+        </plugin>
+
+    </model>
+</sdf>
