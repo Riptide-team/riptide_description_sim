@@ -3,16 +3,11 @@
 
     <ros2_control name="$(arg prefix)_pressure" type="sensor">
         <hardware>
-            <plugin>riptide_hardware_sim/PressureHardwareSim</plugin>
-            <param name="namespace">riptide_1</param>
-            <param name="pressure_topic">pressure</param>
-            <!-- <param name="calibration_pressure">985</param> -->
+            <plugin>ign_ros2_control/IgnitionSystem</plugin>
+            <param name="altitude_topic">/altimeter</param>
         </hardware>
-        <sensor name="$(arg prefix)_pressure">
-            <state_interface name="pressure"/>
-            <state_interface name="temperature"/>
+        <sensor name="$(arg prefix)_pressure_sensor">
             <state_interface name="depth"/>
-            <state_interface name="altitude"/>
         </sensor>
     </ros2_control>
      

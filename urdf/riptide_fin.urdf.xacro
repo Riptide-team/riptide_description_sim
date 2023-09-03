@@ -22,13 +22,13 @@
             </collision>
 		</link>
 
-		<joint name="$(arg prefix)_${name}_joint" type="revolute">
+		<joint name="$(arg prefix)_${name}_joint" type="continuous">
 			<axis xyz="0 0 1"/>
 			<origin rpy="${angle-pi/2} 0 0" xyz="-.35 ${.062*cos(angle)} ${.062*sin(angle)}"/>
 			<parent link="$(arg prefix)"/>
 			<child link="$(arg prefix)_${name}_fin"/>
-			<limit effort="100000.0" lower="${-pi/4}" upper="${pi/4}" velocity="0.5"/>
-			<dynamics damping="0.0" friction="0.0"/>
+			<limit effort="1000.0" lower="${-pi/4}" upper="${pi/4}" velocity="0.5"/>
+			<dynamics damping="0.1" friction="0.1"/>
 		</joint>
 
 		<gazebo>

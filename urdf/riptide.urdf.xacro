@@ -101,9 +101,6 @@
 	<xacro:riptide_fin name="s" orientation="2"/>
 
     <!-- ROS2 control hardware interfaces -->
-    <!-- <xacro:include filename="$(find riptide_description_sim)/urdf/riptide_imu.urdf.xacro"/> -->
-	<!-- <xacro:include filename="$(find riptide_description_sim)/urdf/riptide_actuators.urdf.xacro"/> -->
-	<!-- <xacro:include filename="$(find riptide_description_sim)/urdf/riptide_pressure.urdf.xacro"/> -->
 	<xacro:include filename="$(find riptide_description_sim)/urdf/gazebo.urdf.xacro"/>
 	<xacro:include filename="$(find riptide_description_sim)/urdf/ros2control.urdf.xacro"/>
     
