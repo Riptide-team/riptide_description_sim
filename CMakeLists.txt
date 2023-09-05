@@ -8,6 +8,35 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
+find_package(ignition-gazebo6 REQUIRED)
+set(IGN_GAZEBO_VER ${ignition-gazebo6_VERSION_MAJOR})
+message(STATUS "Compiling against Ignition Fortress")
+
+find_package(ignition-plugin1 REQUIRED)
+set(IGN_PLUGIN_VER ${ignition-plugin1_VERSION_MAJOR})
+find_package(ignition-common4 REQUIRED)
+set(IGN_COMMON_VER ${ignition-common4_VERSION_MAJOR})
+
+include_directories(include)
+
+# Add sources for each plugin to be registered.
+add_library(riptide_plugins SHARED src/Thruster.cc)
+set_property(TARGET riptide_plugins PROPERTY CXX_STANDARD 17)
+target_link_libraries(riptide_plugins
+  ignition-gazebo${IGN_GAZEBO_VER}::ignition-gazebo${IGN_GAZEBO_VER}
+  ignition-common${IGN_COMMON_VER}::ignition-common${IGN_COMMON_VER}
+  ignition-plugin${IGN_PLUGIN_VER}::ignition-plugin${IGN_PLUGIN_VER}
+)
+
+install(TARGETS riptide_plugins
+  DESTINATION lib
+)
+
+install(DIRECTORY
+  include/
+  DESTINATION include
+)
+
 install(
   DIRECTORY config launch meshes urdf worlds
   DESTINATION share/${PROJECT_NAME}
@@ -29,5 +58,8 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+ament_export_include_directories(include)
+ament_export_libraries(riptide_plugins ign_hardware_plugins)
 
 ament_package()

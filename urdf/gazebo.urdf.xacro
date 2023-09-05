@@ -31,29 +31,29 @@
             <parameters>$(find riptide_bringup_sim)/config/riptide_controllers.yaml</parameters>
         </plugin>
 
-        <plugin filename="ignition-gazebo-thruster-system" name="ignition::gazebo::systems::Thruster">
+        <plugin filename="riptide_plugins" name="riptide_plugins::Thruster">
             <joint_name>$(arg prefix)_thruster_joint</joint_name>
-            <thrust_coefficient>0.004422</thrust_coefficient>
+            <!-- <use_angvel_cmd>true</use_angvel_cmd> -->
             <fluid_density>1000</fluid_density>
             <propeller_diameter>0.1</propeller_diameter>
-            <use_angvel_cmd>true</use_angvel_cmd>
+            <thrust_coefficient>0.0004</thrust_coefficient>
         </plugin>
 
         <plugin filename="ignition-gazebo-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
             <link_name>base_link</link_name> <!-- dummy_link and riptide link are fusionned in gazebo as the joint between the two links is fixed-->
-            <xDotU>-0.01</xDotU>
+            <xDotU>-0.001</xDotU>
             <yDotV>-0.05</yDotV>
             <zDotW>-0.05</zDotW>
-            <kDotP>-0.01</kDotP>
+            <kDotP>-0.001</kDotP>
             <mDotQ>-0.05</mDotQ>
             <nDotR>-0.05</nDotR>
 
-            <xUabsU>-5</xUabsU>
-            <yVabsV>-1000</yVabsV>
-            <zWabsW>-1000</zWabsW>
-            <kPabsP>-1</kPabsP>
-            <mQabsQ>-700</mQabsQ>
-            <nRabsR>-700</nRabsR>
+            <xUabsU>-0.1</xUabsU>
+            <yVabsV>-10</yVabsV>
+            <zWabsW>-10</zWabsW>
+            <kPabsP>-0.1</kPabsP>
+            <mQabsQ>-100</mQabsQ>
+            <nRabsR>-100</nRabsR>
 
             <xU>-0.1</xU>
             <yV>-0.1</yV>
