@@ -41,26 +41,26 @@
 
         <plugin filename="ignition-gazebo-hydrodynamics-system" name="ignition::gazebo::systems::Hydrodynamics">
             <link_name>base_link</link_name> <!-- dummy_link and riptide link are fusionned in gazebo as the joint between the two links is fixed-->
-            <xDotU>-0.001</xDotU>
-            <yDotV>-0.05</yDotV>
-            <zDotW>-0.05</zDotW>
-            <kDotP>-0.001</kDotP>
-            <mDotQ>-0.05</mDotQ>
-            <nDotR>-0.05</nDotR>
+            <xDotU>-7.</xDotU>
+            <yDotV>-0.5</yDotV>
+            <zDotW>-0.5</zDotW>
+            <kDotP>-0.01</kDotP>
+            <mDotQ>-0.1</mDotQ>
+            <nDotR>-0.1</nDotR>
 
-            <xUabsU>-0.1</xUabsU>
-            <yVabsV>-10</yVabsV>
-            <zWabsW>-10</zWabsW>
-            <kPabsP>-0.1</kPabsP>
-            <mQabsQ>-100</mQabsQ>
-            <nRabsR>-100</nRabsR>
+            <xUabsU>-0.01</xUabsU>
+            <yVabsV>-0.05</yVabsV>
+            <zWabsW>-0.05</zWabsW>
+            <kPabsP>-0.05</kPabsP>
+            <mQabsQ>-0.01</mQabsQ>
+            <nRabsR>-0.01</nRabsR>
 
-            <xU>-5.</xU>
-            <yV>-0.1</yV>
-            <zW>-0.1</zW>
-            <kP>-0.1</kP>
-            <mQ>-0.1</mQ>
-            <nR>-0.1</nR>
+            <xU>-2.</xU>
+            <yV>-5.</yV>
+            <zW>-5.</zW>
+            <kP>-1.</kP>
+            <mQ>-3.</mQ>
+            <nR>-3.</nR>
         </plugin>
     </gazebo>
 

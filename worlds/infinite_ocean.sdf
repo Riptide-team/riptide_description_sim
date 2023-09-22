@@ -28,6 +28,7 @@
                     <density>1</density>
                 </density_change>
             </graded_buoyancy>
+            <enable>riptide::base_link</enable>
         </plugin>
 
         <model name="water_plane">

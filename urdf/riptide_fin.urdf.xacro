@@ -15,9 +15,9 @@
                 <inertia ixx="0.00001" ixy="0" ixz="0" iyy="0.00001" iyz="0" izz="0.000005" />
             </inertial>
 			<collision>
-				<origin xyz="-0.01 0.04 0" rpy="0 0 0" />
+				<origin xyz="-0.01 0 0.04" rpy="0 0 0" />
                 <geometry>
-                    <box size="0.08 0.1 0.08" />
+                    <box size="0.08 0.01 0.08" />
                 </geometry>
             </collision>
 		</link>
@@ -36,13 +36,13 @@
 				<link_name>$(arg prefix)_${name}_fin</link_name>
 				<control_joint_name>$(arg prefix)_${name}_joint</control_joint_name>
 				<air_density>1000</air_density>
-				<cla>4.13</cla>
-				<cla_stall>-1.1</cla_stall>
-				<cda>0.2</cda>
-				<cda_stall>0.03</cda_stall>
-				<alpha_stall>0.4</alpha_stall>
 				<a0>0</a0>
-				<area>0.05</area>
+				<cla>7.16</cla>
+				<cla_stall>-1.5</cla_stall>
+				<cda>0.038</cda>
+				<cda_stall>1.146</cda_stall>
+				<alpha_stall>0.26</alpha_stall>
+				<area>0.005</area>
 				<upward>0 1 0</upward>
 				<forward>1 0 0</forward>
 				<cp>0 0 0</cp>
