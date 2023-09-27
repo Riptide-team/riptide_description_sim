@@ -8,7 +8,6 @@
           <visualize>true</visualize>
           <topic>imu</topic>
         </sensor>
-
     </gazebo>
     
     <gazebo reference="$(arg prefix)_pressure">

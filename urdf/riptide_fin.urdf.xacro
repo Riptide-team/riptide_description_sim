@@ -2,7 +2,8 @@
 <robot name="$(arg prefix)" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:macro name="riptide_fin" params="name orientation">
-		<xacro:property name="angle" value="${-2*orientation*pi/3 - pi/2}"/>
+		<xacro:property name="joint_position" value="${2*orientation*pi/3 - pi/2}"/>
+		<xacro:property name="fin_angle" value="${4*orientation*pi/3 + pi}"/>
 		<link name="$(arg prefix)_${name}_fin">
 			<visual>
 				<origin xyz="0 0 0" rpy="${-pi/2} ${pi} 0" />
@@ -24,7 +25,7 @@
 
 		<joint name="$(arg prefix)_${name}_joint" type="continuous">
 			<axis xyz="0 0 1"/>
-			<origin rpy="${angle-pi/2} 0 0" xyz="-.35 ${.062*cos(angle)} ${.062*sin(angle)}"/>
+			<origin rpy="${fin_angle} 0 ${pi}" xyz=".3 ${.062*cos(joint_position)} ${.062*sin(joint_position)}"/>
 			<parent link="$(arg prefix)"/>
 			<child link="$(arg prefix)_${name}_fin"/>
 			<limit effort="10000" lower="${-pi/8}" upper="${pi/8}" velocity="2"/> <!-- velocity = 0.5-->

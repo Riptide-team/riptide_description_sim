@@ -6,13 +6,13 @@
     <!-- Rigid body description of the base link -->
 	<link name="$(arg prefix)">
 		<visual>
-			<origin xyz="0.2 0 0" rpy="${-pi/2} 0 ${pi}"/>
+			<origin xyz="-0.25 0 0" rpy="${-pi/2} 0 0"/>
 			<geometry>
 				<mesh filename="package://riptide_description_sim/meshes/riptide_body.stl" scale="0.001 0.001 0.001"/>
 			</geometry>
 		</visual>
 		<inertial>
-			<origin xyz="0 0 0.14" rpy="${-pi/2} 0 ${pi}"/>
+			<origin xyz="0 0 0.06" rpy="0 0 0"/>
 			<mass value="13.5"/>
 			<inertia ixx="0.03675" ixy="0" ixz="0" iyy="0.8" iyz="0" izz="0.8"/>
 		</inertial>
@@ -52,7 +52,7 @@
 	</link>
 
 	<joint name="$(arg prefix)_base_link" type="fixed">
-		<origin rpy="0 0 0" xyz="-0.51 0 0"/>
+		<origin rpy="0 0 ${pi}" xyz="0 0 0"/>
 		<parent link="base_link"/>
 		<child link="$(arg prefix)"/>
 		<dynamics damping="0.0" friction="0.0"/>
@@ -60,7 +60,7 @@
 
 	<joint name="$(arg prefix)_thruster_joint" type="continuous">
 		<axis xyz="1 0 0"/>
-		<origin rpy="0 0 0" xyz="-0.51 0 0"/>
+		<origin rpy="0 0 ${pi}" xyz="0.46 0 0"/>
 		<parent link="$(arg prefix)"/>
 		<child link="$(arg prefix)_thruster"/>
 		<dynamics damping="0.00001" friction="0.00001"/>
@@ -72,10 +72,16 @@
 			<mass value="0.001"/>
 			<inertia ixx="0.0000001" ixy="0" ixz="0" iyy="0.0000001" iyz="0" izz="0.0000001"/>
 		</inertial>
+		<visual>
+			<origin xyz="0.0 0.0 0.0"/>
+			<geometry>
+				<box size="0.04 0.02 0.01" />
+			</geometry>
+		</visual>
 	</link>
 
 	<joint name="$(arg prefix)_imu_joint" type="fixed">
-		<origin xyz="0.0 0.0 0.0"/>
+		<origin rpy="0 0 ${pi}" xyz="-0.3 0.0 0.0"/>
 		<parent link="$(arg prefix)"/>
 		<child link="$(arg prefix)_imu"/>
 		<dynamics damping="0.0" friction="0.0"/>
@@ -86,10 +92,15 @@
 			<mass value="0.001"/>
 			<inertia ixx="0.0000001" ixy="0" ixz="0" iyy="0.0000001" iyz="0" izz="0.0000001"/>
 		</inertial>
+		<visual>
+			<geometry>
+				<cylinder radius="0.01" length="0.01"/>
+			</geometry>
+		</visual>
 	</link>
 
 	<joint name="$(arg prefix)_pressure_joint" type="fixed">
-		<origin xyz="0.0 0.0 0.0"/>
+		<origin rpy="0 0 ${pi}" xyz="-0.35 0.0 -0.06"/>
 		<parent link="$(arg prefix)"/>
 		<child link="$(arg prefix)_pressure"/>
 		<dynamics damping="0.0" friction="0.0"/>
@@ -97,9 +108,9 @@
 
 	<xacro:include filename="$(find riptide_description_sim)/urdf/riptide_fin.urdf.xacro"/>
 
-	<xacro:riptide_fin name="d" orientation="0"/>
 	<xacro:riptide_fin name="p" orientation="1"/>
-	<xacro:riptide_fin name="s" orientation="2"/>
+	<xacro:riptide_fin name="d" orientation="0"/>
+	<xacro:riptide_fin name="s" orientation="-1"/>
 
     <!-- ROS2 control hardware interfaces -->
 	<xacro:include filename="$(find riptide_description_sim)/urdf/gazebo.urdf.xacro"/>
